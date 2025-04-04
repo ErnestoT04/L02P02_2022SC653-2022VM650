@@ -1,0 +1,52 @@
+﻿@model L02P02_2022SC653_2022VM650.Models.ComentariosLibro
+
+@{
+    ViewData["Title"] = "Confirmación";
+}
+
+<link rel="stylesheet" href="~/css/style.css" />
+
+<div class="container">
+
+    <!-- Barra de progreso -->
+    <ul class="progressbar">
+        <li>Autores</li>
+        <li>Libros</li>
+        <li>Comentarios</li>
+        <li class="active">Confirmación</li>
+    </ul>
+
+    <!-- Título -->
+    <h2 style="margin-top: 40px;">¡Comentario guardado exitosamente!</h2>
+    <p>Seleccione el autor -> Seleccione el Libro -> Se muestran los comentarios existentes -> Adicione un nuevo comentario</p>
+
+    <!-- Info del comentario -->
+    <div style="margin-top: 30px; display: flex; justify-content: space-between;">
+        <div style="width: 48%;">
+            <h3 style="color: #7c4dff;">Información del Comentario</h3>
+
+            <div style="background: #f8f8f8; padding: 15px; border-radius: 10px;">
+                <p><strong>Libro:</strong> @Model.IdLibroNavigation?.Nombre</p>
+                <p><strong>Usuario:</strong> @Model.Usuario</p>
+                <p><strong>Fecha:</strong> @Model.CreatedAt?.ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>Comentario:</strong></p>
+                <div style="background: white; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    @Model.Comentarios
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmación visual (como en el prototipo) -->
+        <div style="width: 48%;">
+            <h3 style="color: #7c4dff;">Agregar un Comentario</h3>
+            <div style="border: 1px solid #28a745; background-color: #eaffea; padding: 20px; border-radius: 10px; color: #28a745;">
+                Comentario Adicionado con éxito!
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de regreso -->
+    <div style="margin-top: 30px;">
+        <a asp-action="Index" asp-route-libroId="@Model.IdLibro" class="btn btn-primary">Volver a Comentarios</a>
+    </div>
+</div>

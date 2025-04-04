@@ -1,22 +1,63 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8f9fa;
 }
+
+.compact-header, .compact-footer {
+    background-color: #1b1717;
+    border-bottom: 1px solid #e1e1e1;
+    padding: 5px 0;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.header-logo {
+    height: 40px;
+    margin-bottom: 3px;
+}
+
+.header-title {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 3px;
+}
+
+.header-subtitle {
+    color: #666;
+    font-size: 0.8rem;
+    margin-bottom: 3px;
+}
+
+main {
+    flex: 1;
+    padding: 15px 0;
+    background-color: #ffffff;
+}
+
+a, .compact-footer a {
+    color: #6a0dad;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+    a:hover, .compact-footer a:hover {
+        color: #4b0082;
+        text-decoration: underline;
+    }
+
+.nav-link {
+    color: #6a0dad !important;
+}
+
+    .nav-link:hover {
+        color: #4b0082 !important;
+    }

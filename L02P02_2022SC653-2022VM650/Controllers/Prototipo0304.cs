@@ -30,7 +30,7 @@ namespace L02P02_2022SC653_2022VM650.Controllers
             ViewBag.AutorNombre = libro?.IdAutorNavigation?.Autor;
             ViewBag.LibroId = libroId;
 
-            // Pasamos la lista de comentarios usando ViewBag (como dice el PDF)
+          
             ViewBag.ListaComentarios = comentarios;
 
             return View(new ComentariosLibro { IdLibro = libroId });
@@ -45,14 +45,14 @@ namespace L02P02_2022SC653_2022VM650.Controllers
                  : 1;
             comentario.Id = nuevoId;
             comentario.CreatedAt = DateTime.Now;
-            comentario.Usuario = User.Identity?.Name ?? "usuario1"; // o prueba
+            comentario.Usuario = User.Identity?.Name ?? "usuario1"; 
             _context.ComentariosLibros.Add(comentario);
             _context.SaveChanges();
 
             return RedirectToAction("Confirmacion", new { id = comentario.Id });
         }
 
-        // GET: Confirmación del comentario añadido
+  
         public IActionResult Confirmacion(int id)
         {
             ViewData["PasoActivo"] = "4";

@@ -11,19 +11,27 @@ namespace L02P02_2022SC653_2022VM650.Controllers
         {
             _context = context;
         }
-           
-        // GET: Mostrar comentarios de un libro + caja para nuevo comentario
+
         [HttpGet]
         public IActionResult Index(int libroId)
         {
             ViewData["PasoActivo"] = "3";
 
+            // Obtener los comentarios
             var comentarios = _context.ComentariosLibros
                 .Where(c => c.IdLibro == libroId)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToList();
 
+            // Obtener información del libro y autor
+            var libroConAutor = _context.Libros
+                .Include(l => l.IdAutorNavigation)
+                .FirstOrDefault(l => l.Id == libroId);
+
             ViewBag.LibroId = libroId;
+            ViewBag.LibroNombre = libroConAutor?.Nombre ?? "Libro no encontrado";
+            ViewBag.AutorNombre = libroConAutor?.IdAutorNavigation?.Autor ?? "Autor no encontrado";
+
             return View(comentarios);
         }
 

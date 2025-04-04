@@ -21,22 +21,20 @@
             <h2>Libros del autor: @Model.Autor.Autor</h2>
         </div>
 
-        <form class="container">
-            <div class="author-grid">
-                @foreach (var libro in Model.Libros)
-                {
-                    <div class="author-card">
-                        <div class="author-info">
-                            <span class="author-name">@libro.Nombre</span>
-                            <p>@libro.Descripcion</p>
-                        </div>
-                        <div class="author-actions">
-                            <button type="button" class="btn-select">Seleccionar</button>
-                        </div>
+        <div class="author-grid">
+            @foreach (var libro in Model.Libros)
+            {
+                <div class="author-card">
+                    <div class="author-info">
+                        <span class="author-name">@libro.Nombre</span>
+                        <p>@libro.Descripcion</p>
                     </div>
-                }
-            </div>
-        </form>
+                    <div class="author-actions">
+                        <a asp-controller="Prototipo0304" asp-action="Index" asp-route-libroId="@libro.Id" class="btn-select">Seleccionar</a>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </body>
 </html>

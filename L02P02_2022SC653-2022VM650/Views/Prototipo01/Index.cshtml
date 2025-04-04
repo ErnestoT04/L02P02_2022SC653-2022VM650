@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <div class="container">
@@ -18,24 +18,26 @@
         </ul>
 
         <div class="text-msg">
-            <h2>Seleccione un autor:</h2>
+            @Html.Raw("<h2>Seleccione un autor:</h2>")
         </div>
 
-        <form asp-action="Autorseleccionado" asp-controller="Prototipo01" method="get" class="container">
+        @using (Html.BeginForm("Autorseleccionado", "Prototipo01", FormMethod.Get, new { @class = "container" }))
+        {
             <div class="author-grid">
                 @foreach (var autor in Model)
                 {
                     <div class="author-card">
                         <div class="author-info">
-                            <span class="author-name">@Html.DisplayFor(modelItem => autor.Autor)</span>
+                            @Html.DisplayFor(modelItem => autor.Autor, new { htmlAttributes = new { @class = "author-name" } })
                         </div>
                         <div class="author-actions">
+                            @Html.Label("idAutor", "Seleccionar:", new { @class = "label-seleccion" })
                             <button type="submit" name="idAutor" value="@autor.Id" class="btn-select">Seleccionar</button>
                         </div>
                     </div>
                 }
             </div>
-        </form>
+        }
     </div>
 </body>
 </html>

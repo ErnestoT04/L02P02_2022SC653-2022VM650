@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <div class="container">
@@ -18,7 +18,7 @@
         </ul>
 
         <div class="text-msg">
-            <h2>Libros del autor: @Model.Autor.Autor</h2>
+            @Html.Raw($"<h2>Libros del autor: {Model.Autor.Autor}</h2>")
         </div>
 
         <div class="author-grid">
@@ -26,11 +26,11 @@
             {
                 <div class="author-card">
                     <div class="author-info">
-                        <span class="author-name">@libro.Nombre</span>
+                        @Html.DisplayFor(m => libro.Nombre, new { htmlAttributes = new { @class = "author-name" } })
                         <p>@libro.Descripcion</p>
                     </div>
                     <div class="author-actions">
-                        <a asp-controller="Prototipo0304" asp-action="Index" asp-route-libroId="@libro.Id" class="btn-select">Seleccionar</a>
+                        @Html.ActionLink("Seleccionar", "Index", "Prototipo0304", new { libroId = libro.Id }, new { @class = "btn-select" })
                     </div>
                 </div>
             }

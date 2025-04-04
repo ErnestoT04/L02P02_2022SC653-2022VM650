@@ -1,0 +1,41 @@
+﻿@model List<L02P02_2022SC653_2022VM650.Models.Autore>
+@{
+    ViewData["Title"] = "Comentarios por Libros - Seleccionar Autor";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <ul class="progressbar">
+            <li class="active">Autores</li>
+            <li>Libros</li>
+            <li>Comentarios Existentes</li>
+            <li>Nuevo Comentario</li>
+        </ul>
+
+        <div class="text-msg">
+            <h2>Seleccione un autor:</h2>
+        </div>
+
+        <form asp-action="Autorseleccionado" asp-controller="Prototipo01" method="get" class="container">
+            <div class="author-grid">
+                @foreach (var autor in Model)
+                {
+                    <div class="author-card">
+                        <div class="author-info">
+                            <span class="author-name">@Html.DisplayFor(modelItem => autor.Autor)</span>
+                        </div>
+                        <div class="author-actions">
+                            <button type="submit" name="idAutor" value="@autor.Id" class="btn-select">Seleccionar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+</body>
+</html>

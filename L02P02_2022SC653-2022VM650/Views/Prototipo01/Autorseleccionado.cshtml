@@ -1,0 +1,42 @@
+﻿@model L02P02_2022SC653_2022VM650.Models.AutorConLibrosViewModel
+@{
+    ViewData["Title"] = $"Libros de {Model.Autor.Autor}";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <ul class="progressbar">
+            <li>Autores</li>
+            <li class="active">Libros</li>
+            <li>Comentarios Existentes</li>
+            <li>Nuevo Comentario</li>
+        </ul>
+
+        <div class="text-msg">
+            <h2>Libros del autor: @Model.Autor.Autor</h2>
+        </div>
+
+        <form class="container">
+            <div class="author-grid">
+                @foreach (var libro in Model.Libros)
+                {
+                    <div class="author-card">
+                        <div class="author-info">
+                            <span class="author-name">@libro.Nombre</span>
+                            <p>@libro.Descripcion</p>
+                        </div>
+                        <div class="author-actions">
+                            <button type="button" class="btn-select">Seleccionar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </form>
+    </div>
+</body>
+</html>

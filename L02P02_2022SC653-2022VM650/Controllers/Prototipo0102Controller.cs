@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace L02P02_2022SC653_2022VM650.Controllers
 {
-    public class Prototipo01Controller : Controller
+    public class Prototipo0102Controller : Controller
     {
         private readonly AppDbContext _context;
 
-        public Prototipo01Controller(AppDbContext context)
+        public Prototipo0102Controller(AppDbContext context)
         {
             _context = context;
         }

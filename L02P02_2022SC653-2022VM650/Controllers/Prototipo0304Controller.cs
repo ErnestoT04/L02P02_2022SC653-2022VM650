@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace L02P02_2022SC653_2022VM650.Controllers
 {
-    public class Prototipo0304 : Controller
+    public class Prototipo0304Controller : Controller
     {
         private readonly AppDbContext _context;
-        public Prototipo0304(AppDbContext context)
+        public Prototipo0304Controller(AppDbContext context)
         {
             _context = context;
         }

@@ -17,36 +17,35 @@ namespace L02P02_2022SC653_2022VM650.Controllers
         {
             ViewData["PasoActivo"] = "3";
 
-            // Obtener los comentarios
+            var libro = _context.Libros
+                .Include(l => l.IdAutorNavigation)
+                .FirstOrDefault(l => l.Id == libroId);
+
             var comentarios = _context.ComentariosLibros
                 .Where(c => c.IdLibro == libroId)
                 .OrderByDescending(c => c.CreatedAt)
                 .ToList();
 
-            // Obtener información del libro y autor
-            var libroConAutor = _context.Libros
-                .Include(l => l.IdAutorNavigation)
-                .FirstOrDefault(l => l.Id == libroId);
-
+            ViewBag.LibroNombre = libro?.Nombre;
+            ViewBag.AutorNombre = libro?.IdAutorNavigation?.Autor;
             ViewBag.LibroId = libroId;
-            ViewBag.LibroNombre = libroConAutor?.Nombre ?? "Libro no encontrado";
-            ViewBag.AutorNombre = libroConAutor?.IdAutorNavigation?.Autor ?? "Autor no encontrado";
 
-            return View(comentarios);
+            // Pasamos la lista de comentarios usando ViewBag (como dice el PDF)
+            ViewBag.ListaComentarios = comentarios;
+
+            return View(new ComentariosLibro { IdLibro = libroId });
         }
 
-        // POST: Guardar nuevo comentario
+     
         [HttpPost]
         public IActionResult Guardar(ComentariosLibro comentario)
         {
             var nuevoId = _context.ComentariosLibros.Any()
-                   ? _context.ComentariosLibros.Max(c => c.Id) + 1
-                   : 1;
-
+                 ? _context.ComentariosLibros.Max(c => c.Id) + 1
+                 : 1;
             comentario.Id = nuevoId;
             comentario.CreatedAt = DateTime.Now;
-            comentario.Usuario = User.Identity.Name ?? "usuario1";
-
+            comentario.Usuario = User.Identity?.Name ?? "usuario1"; // o prueba
             _context.ComentariosLibros.Add(comentario);
             _context.SaveChanges();
 

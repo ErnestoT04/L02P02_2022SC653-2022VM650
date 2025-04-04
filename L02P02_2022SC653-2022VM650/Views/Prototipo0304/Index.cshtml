@@ -1,13 +1,15 @@
-﻿@model List<L02P02_2022SC653_2022VM650.Models.ComentariosLibro>
+﻿@model L02P02_2022SC653_2022VM650.Models.ComentariosLibro
 @{
     ViewData["Title"] = "Comentarios";
-    int libroId = (int)ViewBag.LibroId;
-    string autor = ViewBag.AutorNombre ?? "Nombre del Autor Seleccionado";
-    string libro = ViewBag.LibroNombre ?? "Nombre del Libro Seleccionado";
+    string autor = ViewBag.AutorNombre ?? "Autor";
+    string libro = ViewBag.LibroNombre ?? "Libro";
+    var comentarios = ViewBag.ListaComentarios as List<L02P02_2022SC653_2022VM650.Models.ComentariosLibro>;
 }
 
+<link rel="stylesheet" href="~/css/style.css" />
+
 <div class="container mt-4">
-    <!-- Barra de progreso (mantenida como está) -->
+
     <ul class="progressbar">
         <li>Autores</li>
         <li>Libros</li>
@@ -15,10 +17,6 @@
         <li>Confirmación</li>
     </ul>
 
-    <h2 class="mt-4 mb-3">Comentarios por Libros</h2>
-    <p class="mb-4">Seleccione el autor → Seleccione el Libro → Se muestran los comentarios existentes → Adicione un nuevo comentario</p>
-
-    <!-- Info del autor/libro -->
     <div class="row mb-4">
         <div class="col-md-6">
             <div class="card bg-light p-3">
@@ -32,15 +30,14 @@
         </div>
     </div>
 
-    <!-- Contenido en dos columnas -->
     <div class="row">
         <!-- Comentarios existentes -->
         <div class="col-md-6">
             <h3 class="text-primary mb-3">Comentarios Existentes</h3>
 
-            @if (Model.Any())
+            @if (comentarios != null && comentarios.Any())
             {
-                foreach (var c in Model)
+                foreach (var c in comentarios)
                 {
                     <div class="card mb-3">
                         <div class="card-body">
@@ -59,22 +56,21 @@
             }
         </div>
 
-        <!-- Formulario de nuevo comentario -->
+        <!-- Formulario con HTML Helpers -->
         <div class="col-md-6">
             <h3 class="text-primary mb-3">Agregar un Comentario</h3>
 
-            <form asp-action="Guardar" method="post">
-                <input type="hidden" name="IdLibro" value="@libroId" />
+            @using (Html.BeginForm("Guardar", "Prototipo0304", FormMethod.Post))
+            {
+                @Html.HiddenFor(m => m.IdLibro)
 
                 <div class="form-group">
-                    <label for="Comentarios"><strong>Comentario</strong></label>
-                    <textarea name="Comentarios" class="form-control" rows="4" required></textarea>
+                    @Html.LabelFor(m => m.Comentarios, new { @class = "control-label" })
+                    @Html.TextAreaFor(m => m.Comentarios, new { @class = "form-control", rows = 4, required = "required" })
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    Guardar Comentario
-                </button>
-            </form>
+                <button type="submit" class="btn btn-success mt-2">Guardar Comentario</button>
+            }
         </div>
     </div>
 </div>
